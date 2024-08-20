@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
-const page = ({ params }: { params: { id: string } }) => {
+const Page = ({ params }: { params: { id: string } }) => {
   const supabase = createClient();
   const [inputText, setInputText] = useState("");
   const [isAlreadyRead, setIsAlreadyRead] = useState(false);
@@ -246,4 +246,4 @@ const page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,7 +1,7 @@
 import React from "react";
 import { signup } from "./actions";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <form>
@@ -14,4 +14,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
