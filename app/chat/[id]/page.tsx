@@ -156,7 +156,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   );
 
   return (
-    <div className="bg-[#a59ad3] min-h-[100vh] ">
+    <div className="bg-[#a59ad3] min-h-[100vh] p-[5%] sm:p-0 ">
       <header className="fixed top-0">
         <div className="flex justify-between">
           <div className="flex gap-4">
