@@ -2,8 +2,8 @@ import { login } from "./actions";
 
 export default function LoginPage() {
   return (
-    <form>
-      <label htmlFor="email">Email:</label>
+    <form className="max-w-[500px] flex flex-col mx-auto">
+      <label htmlFor="email">メールアドレス:</label>
       <input
         className="border-2"
         id="email"
@@ -11,7 +11,7 @@ export default function LoginPage() {
         type="email"
         required
       />
-      <label htmlFor="password">Password:</label>
+      <label htmlFor="password">パスワード:</label>
       <input
         className="border-2"
         id="password"
@@ -19,7 +19,14 @@ export default function LoginPage() {
         type="password"
         required
       />
-      <button formAction={login}>Log in</button>
+      <div className="text-center">
+        <button
+          className="bg-[#24a7ff] p-[0.5rem] rounded-[1rem] mt-[1rem]"
+          formAction={login}
+        >
+          ログイン
+        </button>
+      </div>
     </form>
   );
 }
