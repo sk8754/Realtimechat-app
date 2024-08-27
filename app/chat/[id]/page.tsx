@@ -5,10 +5,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
-const Page = ({ params }: { params: { id: string } }) => {
+const page = ({ params }: { params: { id: string } }) => {
   const supabase = createClient();
   const [inputText, setInputText] = useState("");
-  const [isAlreadyRead, setIsAlreadyRead] = useState(false);
   const [sendUser, setSendUser] = useState<User | null>(null);
   const [sendUserMessage, setSendUserMessage] = useState<any[]>([]);
   const [toUserMessage, setToUserMessage] = useState<any[]>([]);
@@ -33,9 +32,8 @@ const Page = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  const formatDateTime = (dateString: Date) => {
+  const formatDateTime = (dateString: string) => {
     const date = new Date(dateString);
-
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
@@ -152,6 +150,11 @@ const Page = ({ params }: { params: { id: string } }) => {
     setInputText("");
   };
 
+  const allMessages = [...sendUserMessage, ...toUserMessage].sort(
+    (a, b) =>
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
+
   return (
     <div className="bg-[#a59ad3] min-h-[100vh] ">
       <header className="fixed top-0">
@@ -174,49 +177,52 @@ const Page = ({ params }: { params: { id: string } }) => {
       {/* トークルーム画面 */}
       <div className="pt-[3rem]">
         {/* チャットコンテナ */}
-        <div className="flex justify-between">
-          {/* チャット相手の表示 */}
-          <div>
-            {toUserMessage.map(
-              (message, index) =>
-                sendUser?.id == message.toid && (
-                  <div className="flex relative mb-[0.5rem]" key={index}>
-                    <div>画像</div>
+        <div>
+          {allMessages.map((message) =>
+            message.uid == sendUser?.id ? (
+              <div
+                className="flex justify-end text-right mb-[0.5rem]"
+                key={message.id}
+              >
+                <div className="relative mr-[0.1rem]">
+                  <div className="text-[0.6rem]">
+                    {message.isAlreadyRead ? "既読" : ""}
+                  </div>
+                  <div
+                    className={`absolute bottom-0 w-[70px] translate-x-[-70px] text-[0.25rem] sm:text-[0.5rem] ${
+                      message.isAlreadyRead == true && "translate-x-[-50px]"
+                    }`}
+                  >
+                    {formatDateTime(message.created_at)}
+                  </div>
+                </div>
+                <div className="rounded-[0.5rem] bg-[#22e622] sm:text-[1.5rem]">
+                  {message.message}
+                </div>
+              </div>
+            ) : (
+              message.uid == toUserId && (
+                <div
+                  className="flex justify-start text-left max-w-[80%] mb-[0.5rem]"
+                  key={message.id}
+                >
+                  <div>画像</div>
+                  <div className="flex relative">
                     <div>
-                      <h2>名前</h2>
-                      <div className="bg-[white] rounded-[1rem] p-[0.5rem]">
+                      <p>{toUserProfile ? toUserProfile.name : ""}</p>
+                      <div className="bg-white rounded-[0.5rem] sm:text-[1.5rem]">
                         {message.message}
                       </div>
                     </div>
-                    <div className="relative w-[6rem]">
-                      <p className="text-[10px] absolute bottom-0 ">
-                        {formatDateTime(message.created_at)}
-                      </p>
-                    </div>
-                  </div>
-                )
-            )}
-          </div>
 
-          {/* 自分のチャットの表示 */}
-          <div className="flex flex-col items-center">
-            {sendUserMessage.map(
-              (message, index) =>
-                sendUser?.id == message.uid && (
-                  <div key={index} className="flex gap-[0.5rem] mb-[0.5rem]">
-                    <div className="flex flex-col justify-end items-end  text-[10px]">
-                      <p>{message.isAlreadyRead ? "既読" : ""}</p>
-                      <p>{formatDateTime(message.created_at)}</p>
-                    </div>
-                    <div>
-                      <div className="bg-[#65e865] rounded-[2rem] p-[0.5rem]">
-                        {message.message}
-                      </div>
-                    </div>
+                    <p className="text-[0.25rem] sm:text-[0.5rem] absolute bottom-0 right-[-35px] sm:right-[-70px]">
+                      {formatDateTime(message.created_at)}
+                    </p>
                   </div>
-                )
-            )}
-          </div>
+                </div>
+              )
+            )
+          )}
         </div>
 
         {/* メッセージのスクロール */}
@@ -246,4 +252,4 @@ const Page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default Page;
+export default page;
