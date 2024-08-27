@@ -105,8 +105,6 @@ const Page = ({ params }: { params: { id: string } }) => {
         (payload) => {
           const newMessage = payload.new;
 
-          console.log("Payload received:", payload);
-
           if (newMessage.uid === toUserId) {
             setToUserMessage((prevMessage) => [...prevMessage, newMessage]);
           }
