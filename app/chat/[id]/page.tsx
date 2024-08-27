@@ -156,7 +156,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   );
 
   return (
-    <div className="bg-[#a59ad3] min-h-[100vh] px-[5%] sm:p-0 ">
+    <div className="bg-[#a59ad3] min-h-[100vh]  ">
       <header className="fixed top-0">
         <div className="flex justify-between">
           <div className="flex gap-4">
@@ -175,7 +175,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       </header>
 
       {/* トークルーム画面 */}
-      <div className="pt-[3rem]">
+      <div className="pt-[3rem] px-[5%] sm:px-0">
         {/* チャットコンテナ */}
         <div>
           {allMessages.map((message) =>
@@ -227,27 +227,27 @@ const Page = ({ params }: { params: { id: string } }) => {
 
         {/* メッセージのスクロール */}
         <div ref={messageEndRef} />
-
-        {/* テキスト入力フォーム */}
-        <form
-          onSubmit={onSubmitNewMessage}
-          className="fixed bottom-0 bg-white w-[100vw] h-[8vh] sm:h-[10vh]"
-        >
-          <div className="flex justify-center items-center gap-6 h-[100%]">
-            <input
-              className="w-[50%] h-[80%] pl-[1rem]  bg-[#efeeee] rounded-[2rem]"
-              type="text"
-              name="message"
-              onChange={(e) => setInputText(e.target.value)}
-              value={inputText}
-            />
-
-            <button className="bg-[#41cf41] px-[2rem] h-[90%] rounded-[1rem]">
-              送信
-            </button>
-          </div>
-        </form>
       </div>
+
+      {/* テキスト入力フォーム */}
+      <form
+        onSubmit={onSubmitNewMessage}
+        className="fixed bottom-0 bg-white w-[100vw] h-[8vh] sm:h-[10vh]"
+      >
+        <div className="flex justify-center items-center gap-6 h-[100%]">
+          <input
+            className="w-[50%] h-[80%] pl-[1rem]  bg-[#efeeee] rounded-[2rem]"
+            type="text"
+            name="message"
+            onChange={(e) => setInputText(e.target.value)}
+            value={inputText}
+          />
+
+          <button className="bg-[#41cf41] px-[2rem] h-[90%] rounded-[1rem]">
+            送信
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
