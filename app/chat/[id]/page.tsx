@@ -159,7 +159,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     <div className="bg-[#a59ad3] min-h-[100vh]  ">
       <header className="fixed top-0">
         <div className="flex justify-between">
-          <div className="flex gap-4">
+          <div className="flex gap-4 pl-[1rem] sm:pl-0">
             <button>
               <Link className="font-bold" href={"/"}>
                 ＜
