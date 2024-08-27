@@ -226,7 +226,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         </div>
 
         {/* メッセージのスクロール */}
-        <div ref={messageEndRef} />
+        {/* <div ref={messageEndRef} /> */}
       </div>
 
       {/* テキスト入力フォーム */}
