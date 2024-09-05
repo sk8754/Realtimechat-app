@@ -187,7 +187,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                     {message.isAlreadyRead ? "既読" : ""}
                   </div>
                   <div
-                    className={`absolute bottom-0 w-[70px] translate-x-[-70px] text-[0.25rem] sm:text-[0.5rem] ${
+                    className={`absolute bottom-0 w-[70px] translate-x-[-70px] text-[0.5rem] sm:text-[0.5rem] ${
                       message.isAlreadyRead == true && "translate-x-[-50px]"
                     }`}
                   >
@@ -213,7 +213,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                       </div>
                     </div>
 
-                    <p className="text-[0.25rem] sm:text-[0.5rem] absolute bottom-0 right-[-35px] sm:right-[-70px]">
+                    <p className="text-[0.5rem] sm:text-[0.5rem] absolute bottom-0 right-[-66px] sm:right-[-70px]">
                       {formatDateTime(message.created_at)}
                     </p>
                   </div>
